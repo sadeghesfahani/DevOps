@@ -10,3 +10,9 @@ class CalculationView(viewsets.ViewSet):
         first = request.data.get("first")
         second = request.data.get("second")
         return Response({"result": first + second})
+
+    @staticmethod
+    def power(request):
+        first = request.data.get("first")
+        second = request.data.get("second")
+        return Response({"result": first ** second})
