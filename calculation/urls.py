@@ -3,4 +3,5 @@ from .views import CalculationView
 
 urlpatterns = [
     path('add/', CalculationView.as_view({'post': 'add'})),
+    path('multiply/', CalculationView.as_view({'post': 'multiply'})),
 ]
