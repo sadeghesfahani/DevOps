@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+  devopsapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    ports:
+      - "8000:8000"
+      - "63342:63342"
+    command: python3 manage.py runserver 0.0.0.0:8000
+
+    depends_on:
+      - redis
+      - postgres
+
+    volumes:
+      - ./:/etc/app
+
+
+  redis:
+    image: redis:6
+    restart: always
+    command: [ "redis-server", "--appendonly", "yes" ]
+    hostname: redis
+    volumes:
+      - redis-data:/data
+    ports:
+      - "6379:6379"
+  postgres:
+    image: postgres:13
+    restart: always
+    environment:
+      - POSTGRES_USER=sina
+      - POSTGRES_PASSWORD=sina
+      - POSTGRES_DB=sina
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+
+volumes:
+  redis-data:
+  postgres:
+  devopsapp:
