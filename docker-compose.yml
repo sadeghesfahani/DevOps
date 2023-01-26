@@ -18,16 +18,6 @@ services:
     volumes:
       - ./:/etc/app
 
-
-  redis:
-    image: redis:6
-    restart: always
-    command: [ "redis-server", "--appendonly", "yes" ]
-    hostname: redis
-    volumes:
-      - redis-data:/data
-    ports:
-      - "6379:6379"
   postgres:
     image: postgres:13
     restart: always
